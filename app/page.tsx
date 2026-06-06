@@ -12,6 +12,7 @@ import ActionEngine from "@/components/ActionEngine";
 import Gamification from "@/components/Gamification";
 import WhyWeWin from "@/components/WhyWeWin";
 import BusinessModel from "@/components/BusinessModel";
+import Workflow from "@/components/Workflow";
 import Roadmap from "@/components/Roadmap";
 import Footer from "@/components/Footer";
 
@@ -33,6 +34,7 @@ export default function Home() {
         <Gamification />
         <WhyWeWin />
         <BusinessModel />
+        <Workflow />
         <Roadmap />
       </main>
       <Footer />
