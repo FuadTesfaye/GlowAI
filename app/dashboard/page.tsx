@@ -807,9 +807,39 @@ export default function DashboardPage() {
                               <span className="label">Cortisol Stress Indicator</span>
                               <span className="value text-rose">3.5 / 10 (Low)</span>
                             </div>
-                            <div className="metric-row total">
+                            <div className="metric-row total" style={{ marginBottom: "1rem" }}>
                               <span className="label">Dynamic Glow Index</span>
                               <span className="value text-accent">84 / 100</span>
+                            </div>
+
+                            {/* Recommendations panel */}
+                            <div className="suggestions-panel" style={{ borderTop: "1px dashed var(--line)", paddingTop: "1rem", marginTop: "1rem" }}>
+                              <h4 style={{ fontSize: "0.8rem", fontWeight: 800, textTransform: "uppercase", color: "var(--primary)", letterSpacing: "0.02em", marginBottom: "0.75rem", display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                                <Bot size={13} /> Hakim AI Protocol
+                              </h4>
+                              
+                              <div style={{ display: "grid", gap: "0.75rem" }}>
+                                <div style={{ fontSize: "0.75rem", background: "var(--surface-soft)", padding: "0.6rem 0.8rem", borderRadius: "6px", border: "1px solid var(--line)" }}>
+                                  <strong style={{ display: "block", color: "var(--accent)", fontSize: "0.68rem", textTransform: "uppercase", fontWeight: 800, marginBottom: "0.2rem" }}>Dietary Intake (Eat / Drink)</strong>
+                                  <p style={{ margin: 0, color: "var(--muted)", fontWeight: 600, lineHeight: 1.4 }}>
+                                    Consume antioxidant-rich foods (blueberries, spinach) and take 2.5L of mineral hydration to support cellular turn-over.
+                                  </p>
+                                </div>
+
+                                <div style={{ fontSize: "0.75rem", background: "var(--surface-soft)", padding: "0.6rem 0.8rem", borderRadius: "6px", border: "1px solid var(--line)" }}>
+                                  <strong style={{ display: "block", color: "var(--primary)", fontSize: "0.68rem", textTransform: "uppercase", fontWeight: 800, marginBottom: "0.2rem" }}>Skincare Routine (Do)</strong>
+                                  <p style={{ margin: 0, color: "var(--muted)", fontWeight: 600, lineHeight: 1.4 }}>
+                                    Apply SPF 50+ mineral protection on mornings, and a ceramide recovery cream before bed.
+                                  </p>
+                                </div>
+
+                                <div style={{ fontSize: "0.75rem", background: "var(--surface-soft)", padding: "0.6rem 0.8rem", borderRadius: "6px", border: "1px solid var(--line)" }}>
+                                  <strong style={{ display: "block", color: "var(--sky)", fontSize: "0.68rem", textTransform: "uppercase", fontWeight: 800, marginBottom: "0.2rem" }}>Healthy Habits</strong>
+                                  <p style={{ margin: 0, color: "var(--muted)", fontWeight: 600, lineHeight: 1.4 }}>
+                                    Do 10 minutes of facial massage to enhance vascular flow, and log 8 hours of sleep.
+                                  </p>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         ) : (
