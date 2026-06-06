@@ -80,8 +80,11 @@ export default function DashboardPage() {
   const [scanProgress, setScanProgress] = useState(0);
   const [scanStatusMsg, setScanStatusMsg] = useState("");
   const [hasCamera, setHasCamera] = useState(false);
+  const [scanMode, setScanMode] = useState<"video" | "upload">("video");
+  const [uploadedImageSrc, setUploadedImageSrc] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Hakim AI Chat Tab States
   const [chatInput, setChatInput] = useState("");
@@ -220,6 +223,27 @@ export default function DashboardPage() {
       streamRef.current.getTracks().forEach((track) => track.stop());
       streamRef.current = null;
     }
+    setScanState("idle");
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          setUploadedImageSrc(event.target.result as string);
+          setScanMode("upload");
+          setScanState("streaming");
+          triggerToast("Biometric image loaded! Ready to analyze.", "success");
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const clearUpload = () => {
+    setUploadedImageSrc(null);
     setScanState("idle");
   };
 
@@ -640,11 +664,19 @@ export default function DashboardPage() {
                   exit={{ opacity: 0, y: -10 }}
                   className="dashboard-columns"
                 >
-                  {/* Left block: camera circular stream viewport */}
                   <div className="column-left">
                     <div className="panel-card" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "350px", background: "#060a08" }}>
                       <div className="circular-camera-view" style={{ borderColor: scanState === "scanning" ? "var(--primary)" : "var(--line)" }}>
-                        {scanState !== "result" && (
+                        {/* Hidden input element for browsing/capturing photo */}
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          onChange={handleImageUpload}
+                          accept="image/*"
+                          style={{ display: "none" }}
+                        />
+
+                        {scanState !== "result" && scanMode === "video" && (
                           <video
                             ref={videoRef}
                             autoPlay
@@ -655,10 +687,19 @@ export default function DashboardPage() {
                           />
                         )}
 
-                        {(!hasCamera || scanState === "idle" || scanState === "requesting") && scanState !== "result" && (
+                        {scanState !== "result" && scanMode === "upload" && uploadedImageSrc && (
+                          <img
+                            src={uploadedImageSrc}
+                            alt="Uploaded biometric mirror source"
+                            className="video-element"
+                            style={{ display: "block", objectFit: "cover" }}
+                          />
+                        )}
+
+                        {scanState === "idle" && (
                           <div className="fallback-placeholder">
                             <Camera size={38} className="text-muted" />
-                            <span>Mirror Camera Idle</span>
+                            <span style={{ fontSize: "0.7rem", marginTop: "0.25rem" }}>Mirror Telemetry Idle</span>
                           </div>
                         )}
 
@@ -679,18 +720,34 @@ export default function DashboardPage() {
 
                       <div className="camera-controls-wrapper">
                         {scanState === "idle" && (
-                          <button onClick={startCamera} className="btn btn-primary" style={{ width: "100%" }}>
-                            <Camera size={14} /> Connect Mirror Camera
-                          </button>
+                          <div className="button-group" style={{ flexDirection: "column", gap: "0.5rem", width: "100%" }}>
+                            <button onClick={startCamera} className="btn btn-primary" style={{ width: "100%" }}>
+                              <Camera size={14} /> Connect Mirror Camera
+                            </button>
+                            <button onClick={() => fileInputRef.current?.click()} className="btn btn-secondary" style={{ width: "100%" }}>
+                              Browse Device / Take Photo
+                            </button>
+                          </div>
                         )}
 
-                        {scanState === "streaming" && (
+                        {scanState === "streaming" && scanMode === "video" && (
                           <div className="button-group">
                             <button onClick={triggerScan} className="btn btn-primary" style={{ flex: 1 }}>
                               <Sparkles size={14} /> Analyze Biometrics
                             </button>
                             <button onClick={stopCamera} className="btn btn-secondary">
                               Disconnect
+                            </button>
+                          </div>
+                        )}
+
+                        {scanState === "streaming" && scanMode === "upload" && (
+                          <div className="button-group">
+                            <button onClick={triggerScan} className="btn btn-primary" style={{ flex: 1 }}>
+                              <Sparkles size={14} /> Analyze Photo
+                            </button>
+                            <button onClick={clearUpload} className="btn btn-secondary">
+                              Clear Upload
                             </button>
                           </div>
                         )}
@@ -705,9 +762,17 @@ export default function DashboardPage() {
                         )}
 
                         {scanState === "result" && (
-                          <button onClick={() => setScanState("streaming")} className="btn btn-secondary" style={{ width: "100%" }}>
-                            Recapture Signals
-                          </button>
+                          <div className="button-group" style={{ width: "100%" }}>
+                            {scanMode === "video" ? (
+                              <button onClick={() => { setScanMode("video"); startCamera(); }} className="btn btn-secondary" style={{ width: "100%" }}>
+                                Recapture Video
+                              </button>
+                            ) : (
+                              <button onClick={() => fileInputRef.current?.click()} className="btn btn-secondary" style={{ width: "100%" }}>
+                                Browse Another Photo
+                              </button>
+                            )}
+                          </div>
                         )}
                       </div>
                     </div>
