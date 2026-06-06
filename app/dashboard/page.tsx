@@ -37,6 +37,14 @@ export default function DashboardPage() {
   const router = useRouter();
   const [userName, setUserName] = useState("Fuad");
   const [activeTab, setActiveTab] = useState("home");
+
+  const navTabs = [
+    { id: "home", label: "Overview", icon: <Award size={16} /> },
+    { id: "scan", label: "Mirror Telemetry", icon: <Camera size={16} /> },
+    { id: "hakim", label: "Hakim AI Chat", icon: <Bot size={16} /> },
+    { id: "logs", label: "Daily Intake Logs", icon: <Droplets size={16} /> },
+    { id: "upgrade", label: "Premium Upgrade", icon: <Sparkles size={16} /> },
+  ];
   
   // Dashboard overall stats
   const [glowScore, setGlowScore] = useState(69);
