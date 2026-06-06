@@ -393,3 +393,46 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--muted);
 }
+
+/* ─── Phone Shell Mockup (Desktop Viewports) ─── */
+.phone-shell {
+  position: relative;
+  background: var(--bg);
+  box-shadow: 
+    0 0 0 10px var(--surface-strong),
+    0 0 0 12px color-mix(in srgb, var(--text) 10%, transparent),
+    0 25px 80px rgba(0, 0, 0, 0.45);
+  border-radius: 40px;
+}
+
+.phone-shell::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 5px;
+  background: var(--text);
+  opacity: 0.15;
+  border-radius: 999px;
+  z-index: 40;
+}
+
+/* Hide scrollbars inside mobile phone viewport to emulate native app feel */
+.dashboard-scrollable::-webkit-scrollbar {
+  display: none !important;
+}
+.dashboard-scrollable {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+
+.chat-messages-container::-webkit-scrollbar {
+  display: none !important;
+}
+.chat-messages-container {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+

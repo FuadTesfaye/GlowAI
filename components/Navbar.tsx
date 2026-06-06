@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Sun, Moon, Menu, X } from "lucide-react";
+import Link from "next/link";
+
 
 const navLinks = [
   { label: "Problem", href: "#problem" },
@@ -148,21 +150,39 @@ export default function Navbar() {
 
         {/* Actions */}
         <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+          <Link
+            href="/login"
+            className="btn btn-primary"
+            style={{
+              minHeight: "2.3rem",
+              height: "2.3rem",
+              padding: "0 1.1rem",
+              fontSize: "0.85rem",
+              borderRadius: "var(--radius)",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 4px 12px var(--primary-glow)",
+            }}
+          >
+            Try Demo
+          </Link>
+
           <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
             style={{
               display: "grid",
               placeItems: "center",
-              width: "2.5rem",
-              height: "2.5rem",
+              width: "2.3rem",
+              height: "2.3rem",
               border: "1px solid var(--line)",
               borderRadius: "var(--radius)",
               background: "var(--surface)",
               transition: "all 0.2s ease",
             }}
           >
-            {isDark ? <Sun size={16} /> : <Moon size={16} />}
+            {isDark ? <Sun size={15} /> : <Moon size={15} />}
           </button>
 
           {/* Mobile Menu Toggle */}
@@ -173,14 +193,14 @@ export default function Navbar() {
             style={{
               display: "none",
               placeItems: "center",
-              width: "2.5rem",
-              height: "2.5rem",
+              width: "2.3rem",
+              height: "2.3rem",
               border: "1px solid var(--line)",
               borderRadius: "var(--radius)",
               background: "var(--surface)",
             }}
           >
-            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+            {mobileOpen ? <X size={16} /> : <Menu size={16} />}
           </button>
         </div>
       </div>
@@ -222,6 +242,23 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          <Link
+            href="/login"
+            onClick={() => setMobileOpen(false)}
+            className="btn btn-primary"
+            style={{
+              marginTop: "0.5rem",
+              minHeight: "2.75rem",
+              width: "100%",
+              borderRadius: "var(--radius)",
+              fontSize: "0.92rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            Try Demo
+          </Link>
         </motion.nav>
       )}
 

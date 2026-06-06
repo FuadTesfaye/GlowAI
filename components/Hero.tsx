@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
+
 
 export default function Hero() {
   const circumference = 2 * Math.PI * 68;
@@ -104,10 +106,10 @@ export default function Hero() {
               marginBottom: "3rem",
             }}
           >
-            <a href="#solution" className="btn btn-primary">
-              Discover GlowAI
+            <Link href="/signup" className="btn btn-primary">
+              Try GlowAI Demo
               <ArrowRight size={16} />
-            </a>
+            </Link>
             <a href="#features" className="btn btn-secondary">
               Explore Features
             </a>
