@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="GlowAI is an AI skin and wellness intelligence platform for Africa, combining selfie analysis, hydration, sleep, mood, and nutrition into one Glow Score."
+    />
+    <meta name="theme-color" content="#f7fbf8" />
+    <title>GlowAI | Africa's AI Skin & Wellness Intelligence Platform</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preload" href="assets/glowai-hero.png" as="image" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="GlowAI home">
+        <span class="brand-mark" aria-hidden="true">G</span>
+        <span>GlowAI</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#analysis">Analysis</a>
+        <a href="#score">Glow Score</a>
+        <a href="#coach">Coach</a>
+        <a href="#progress">Progress</a>
+      </nav>
+      <button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch to dark mode" aria-pressed="false">
+        <span class="theme-icon" aria-hidden="true"></span>
+      </button>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Skin intelligence built for everyday wellness</p>
+          <h1>Africa's AI Skin & Wellness Intelligence Platform</h1>
+          <p class="hero-text">
+            GlowAI turns a selfie and simple wellness habits into skin insights, a Glow Score, and localized recommendations that connect beauty with sleep, hydration, stress, and nutrition.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#analysis">Start analysis</a>
+            <a class="button secondary" href="#score">Check Glow Score</a>
+          </div>
+          <dl class="metrics-strip" aria-label="Platform highlights">
+            <div>
+              <dt>5</dt>
+              <dd>skin signals</dd>
+            </div>
+            <div>
+              <dt>4</dt>
+              <dd>wellness inputs</dd>
+            </div>
+            <div>
+              <dt>100</dt>
+              <dd>score ceiling</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="hero-visual" aria-label="GlowAI wellness dashboard preview">
+          <img src="assets/glowai-hero.png" alt="Illustrated GlowAI selfie analysis and wellness dashboard preview" />
+          <div class="floating-score" aria-label="Sample Glow Score">
+            <span>Glow Score</span>
+            <strong id="heroScore">72</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="section intro-band" aria-label="Core product promise">
+        <div>
+          <p class="eyebrow">The insight</p>
+          <h2>Your skin reflects your overall wellness.</h2>
+        </div>
+        <p>
+          GlowAI looks beyond acne alone. It combines visible skin signals with sleep, water intake, stress, mood, and local nutrition patterns to produce practical beauty and wellness guidance.
+        </p>
+      </section>
+
+      <section class="section app-grid" id="analysis">
+        <div class="panel analysis-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Feature 1</p>
+            <h2>Selfie Analysis</h2>
+          </div>
+          <label class="upload-zone" for="selfieInput" id="uploadZone">
+            <input id="selfieInput" type="file" accept="image/png,image/jpeg,image/webp" />
+            <span class="upload-icon" aria-hidden="true">+</span>
+            <span class="upload-title">Upload a selfie</span>
+            <span class="upload-copy">JPG, PNG, or WebP. Runs locally for this MVP demo.</span>
+          </label>
+          <div class="preview-frame is-empty" id="previewFrame">
+            <img id="imagePreview" alt="Uploaded selfie preview" />
+            <span>No image selected</span>
+          </div>
+          <button class="button primary full" type="button" id="analyzeButton">Analyze selfie</button>
+        </div>
+
+        <div class="panel result-panel">
+          <div class="section-heading inline">
+            <div>
+              <p class="eyebrow">AI skin signals</p>
+              <h2>Analysis Results</h2>
+            </div>
+            <span class="status-pill" id="analysisStatus">Waiting</span>
+          </div>
+          <div class="signal-list" id="signalList">
+            <article class="signal-card">
+              <span>Acne severity</span>
+              <strong>--</strong>
+              <div class="bar"><i style="width: 0%"></i></div>
+            </article>
+            <article class="signal-card">
+              <span>Dryness</span>
+              <strong>--</strong>
+              <div class="bar"><i style="width: 0%"></i></div>
+            </article>
+            <article class="signal-card">
+              <span>Oiliness</span>
+              <strong>--</strong>
+              <div class="bar"><i style="width: 0%"></i></div>
+            </article>
+            <article class="signal-card">
+              <span>Dark circles</span>
+              <strong>--</strong>
+              <div class="bar"><i style="width: 0%"></i></div>
+            </article>
+            <article class="signal-card">
+              <span>Skin fatigue</span>
+              <strong>--</strong>
+              <div class="bar"><i style="width: 0%"></i></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section score-layout" id="score">
+        <div class="score-card">
+          <div>
+            <p class="eyebrow">Feature 2</p>
+            <h2>Glow Score</h2>
+            <p>
+              A single score combining skin health, hydration, sleep quality, stress, mood, and nutrition habits.
+            </p>
+          </div>
+          <div class="score-ring" aria-live="polite">
+            <svg viewBox="0 0 160 160" role="img" aria-label="Glow Score chart">
+              <circle class="ring-track" cx="80" cy="80" r="68"></circle>
+              <circle class="ring-progress" id="ringProgress" cx="80" cy="80" r="68"></circle>
+            </svg>
+            <div>
+              <strong id="glowScore">72</strong>
+              <span>/100</span>
+            </div>
+          </div>
+          <div class="contributors" id="contributors">
+            <span>Sleep: Fair</span>
+            <span>Hydration: Low</span>
+            <span>Stress: Moderate</span>
+          </div>
+        </div>
+
+        <form class="wellness-form" id="wellnessForm">
+          <label>
+            <span>Sleep last night</span>
+            <input type="range" min="0" max="10" value="5" id="sleepInput" />
+            <output id="sleepOutput">5h</output>
+          </label>
+          <label>
+            <span>Water today</span>
+            <input type="range" min="0" max="12" value="4" id="waterInput" />
+            <output id="waterOutput">4 cups</output>
+          </label>
+          <label>
+            <span>Stress level</span>
+            <input type="range" min="0" max="10" value="6" id="stressInput" />
+            <output id="stressOutput">6/10</output>
+          </label>
+          <label>
+            <span>Mood</span>
+            <select id="moodInput">
+              <option value="balanced">Balanced</option>
+              <option value="tired">Tired</option>
+              <option value="anxious">Anxious</option>
+              <option value="energized">Energized</option>
+            </select>
+          </label>
+          <label>
+            <span>Nutrition habits</span>
+            <select id="nutritionInput">
+              <option value="mixed">Mixed meals</option>
+              <option value="lowIron">Low iron signs</option>
+              <option value="highSugar">High sugar week</option>
+              <option value="wholeFoods">Whole foods</option>
+            </select>
+          </label>
+        </form>
+      </section>
+
+      <section class="section recommendations" aria-label="Personalized recommendations">
+        <div class="section-heading">
+          <p class="eyebrow">Localized guidance</p>
+          <h2>Recommendations</h2>
+        </div>
+        <div class="recommendation-grid" id="recommendations"></div>
+      </section>
+
+      <section class="section coach-progress">
+        <div class="panel coach-panel" id="coach">
+          <div class="section-heading">
+            <p class="eyebrow">Feature 3</p>
+            <h2>AI Beauty Coach</h2>
+          </div>
+          <div class="chat-window" id="chatWindow" aria-live="polite">
+            <div class="message bot">
+              <span>GlowAI</span>
+              <p>Ask me about acne, dryness, dark circles, stress, hydration, or local food ideas for better skin energy.</p>
+            </div>
+          </div>
+          <form class="chat-form" id="chatForm">
+            <input id="chatInput" type="text" placeholder="Why am I getting acne?" autocomplete="off" />
+            <button class="button primary" type="submit">Send</button>
+          </form>
+        </div>
+
+        <div class="panel progress-panel" id="progress">
+          <div class="section-heading inline">
+            <div>
+              <p class="eyebrow">Feature 4</p>
+              <h2>Progress Tracking</h2>
+            </div>
+            <button class="button ghost" type="button" id="saveProgress">Save week</button>
+          </div>
+          <div class="trend-chart" id="trendChart" aria-label="Weekly Glow Score trend"></div>
+          <div class="progress-list" id="progressList"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>GlowAI MVP</span>
+      <span>Wellness guidance only, not a medical diagnosis.</span>
+    </footer>
+
+    <script src="app.js" defer></script>
+  </body>
+</html>
